@@ -18,8 +18,7 @@ const Register = () => {
 
 const [allErrors, setAllErrors] = useState({})
 
-  const changeValue = (e) =>
-    setUser({ ...user, [e.target.name]: e.target.value });
+  const changeValue = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,21 +39,19 @@ const [allErrors, setAllErrors] = useState({})
         }
         return setAllErrors(errors)
       }
-      console.log(allErrors)
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
-        <Input onChange={changeValue} type={"email"} name="email" />
+        <Input onChange={changeValue} type={"email"} name="email" placeholder="usuario@gmail.com"/>
         <p>{allErrors.invalidEmail && allErrors.invalidEmail}</p>
            
         <label htmlFor="password">Password</label>
-        <Input onChange={changeValue} type={"password"} name="password" />
+        <Input onChange={changeValue} type={"password"} name="password" placeholder="Contraseña"/>
         <p>{allErrors.invalidPass && allErrors.invalidPass}</p>
       
-
         <Input type={"submit"} value="Registrar" />
        
       </form>

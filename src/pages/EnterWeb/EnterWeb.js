@@ -68,7 +68,7 @@ const EnterWeb = () => {
 
         <DivButtons>
           <NavL to={'/register'}><button>Registrarse</button> </NavL>
-          <NavL to={'/'}><button>Ingresar</button> </NavL>
+          <NavL to={'/login'}><button>Ingresar</button> </NavL>
           <NavL to={'/'}><button>Ingresar con Google</button> </NavL>
           <NavL to={'/'}><button>Invitado +</button> </NavL>  
         </DivButtons>
