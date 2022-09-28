@@ -12,13 +12,10 @@ const Input = styled.input`
 
 
 const Login = () => {
-   const {login} = useTheContext();
+   const {login, user, setUser} = useTheContext();
    const navigate = useNavigate()
 
-   const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
+
   const [allErrors, setAllErrors] = useState({})
 
   const handleLogin = async (e) => {

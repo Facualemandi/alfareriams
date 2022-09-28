@@ -8,13 +8,9 @@ const Input = styled.input`
 `;
 
 const Register = () => {
-  const { signUp } = useTheContext();
+  const { signUp, user, setUser } = useTheContext();
   const navigate = useNavigate();
 
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
 
 const [allErrors, setAllErrors] = useState({})
 
