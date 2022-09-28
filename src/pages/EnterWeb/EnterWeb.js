@@ -7,7 +7,7 @@ import { useTheContext } from "../../context/context";
 
 const Main = styled.main`
 overflow-x: hidden;
-height: 90vh;
+min-height: 100vh;
 display: flex;
 justify-content: center;
 align-items: center;
