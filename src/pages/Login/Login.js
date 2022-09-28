@@ -55,6 +55,9 @@ const enterUser = (e) => { setUser({...user, [e.target.name]:e.target.value})};
         <label htmlFor="password">Password</label>
         <Input onChange={enterUser} type={"password"} name="password" placeholder="Contraseña"/>
         <p>{allErrors.wrongPass && allErrors.wrongPass}</p>
+
+
+        <p>{allErrors.notUser && allErrors.notUser}</p>
       
         <Input type={"submit"} value="Ingresar" />
        
