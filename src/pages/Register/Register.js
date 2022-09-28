@@ -3,9 +3,55 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useTheContext } from "../../context/context";
 
+
+const Main = styled.main`
+border: 1px solid blue;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+`
+
+
 const Input = styled.input`
-  padding: 15px;
+  padding: 20px;
+  height: max-content;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
 `;
+const InputSubmit = styled.input`
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  padding: 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+
+`
+const Form = styled.form`
+width: 80%;
+display: flex;
+flex-direction: column;
+border-radius: 15px;
+padding: 15px;
+background-color: #7d63b449;
+color: white;
+
+label{
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+`
+const Err = styled.p`
+  color: rgb(200, 61, 61);
+  font-family: 'Roboto',sans-serif;
+`
 
 const Register = () => {
   const { signUp, user, setUser } = useTheContext();
@@ -38,22 +84,22 @@ const [allErrors, setAllErrors] = useState({})
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+  
+    <Main>
+      <Form onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <Input onChange={changeValue} type={"email"} name="email" placeholder="usuario@gmail.com"/>
-        <p>{allErrors.invalidEmail && allErrors.invalidEmail}</p>
+        <Err>{allErrors.invalidEmail && allErrors.invalidEmail}</Err>
            
         <label htmlFor="password">Password</label>
         <Input onChange={changeValue} type={"password"} name="password" placeholder="Contraseña"/>
-        <p>{allErrors.invalidPass && allErrors.invalidPass}</p>
+        <Err>{allErrors.invalidPass && allErrors.invalidPass}</Err>
       
-        <Input type={"submit"} value="Registrar" />
-       
-      </form>
-    </>
+        <InputSubmit type={"submit"} value="Registrar" />
+      </Form>
+    </Main>
+  
   );
 };
 
 export default Register;
-// user.password.length <= 5 ? console.log("Error") : navigate("/home");
