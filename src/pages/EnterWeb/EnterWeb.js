@@ -58,16 +58,28 @@ button{
   border: none;
   border-radius: 10px;
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.156);
-  margin-bottom: 15px;
   font-size: 16px;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
+  @media (max-width: 600px){
+    :active{
+      background-color: rgb(226, 237, 248);
+    }
+  }
+  @media (min-width: 600px){
+    cursor: pointer;
+    &:hover{
+      background-color: rgb(226, 237, 248);
+      transition: 0.3s;
+    }
+  }
 }
 
 `;
 const NavL = styled(NavLink)`
   width: 100%;
-  padding: 10px;
+  margin: 10px;
+  height: max-content;
 `
 const ImgFondo = styled.img`
  width: 100%;
