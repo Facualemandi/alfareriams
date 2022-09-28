@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useTheContext } from "../../context/context";
 
@@ -9,6 +10,8 @@ const Input = styled.input`
 const Register = () => {
 
   const {signUp} = useTheContext();
+  const navigate = useNavigate()
+  
 
   const [user, setUser] = useState({
     email: "",
@@ -20,7 +23,12 @@ const Register = () => {
   
   const handleSubmit = (e) => {
       e.preventDefault();
-      signUp(user.email, user.password)
+      try {
+        signUp(user.email, user.password);
+        navigate('/home')
+      } catch (error) {
+        
+      }
   }
 
   return (
