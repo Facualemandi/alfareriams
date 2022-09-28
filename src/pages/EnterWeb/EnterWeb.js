@@ -21,7 +21,6 @@ const SectionLogin = styled.section`
  margin: auto;
  border-radius: 30px;
  margin-top: -100px;
- position: relative;
  background-color: #74a6e467;
  backdrop-filter: blur(3px);
  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.300);
@@ -91,7 +90,6 @@ const ImgFondo = styled.img`
 }
 `
 const ContainerDesktio = styled.section`
-
 @media (min-width: 600px){
    display: flex;
    box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.150);

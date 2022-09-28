@@ -11,8 +11,6 @@ display: flex;
 justify-content: center;
 align-items: center;
 `
-
-
 const Input = styled.input`
   padding: 20px;
   height: max-content;
