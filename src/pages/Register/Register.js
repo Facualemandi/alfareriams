@@ -5,7 +5,6 @@ import { useTheContext } from "../../context/context";
 
 
 const Main = styled.main`
-border: 1px solid blue;
 height: 100vh;
 display: flex;
 justify-content: center;
@@ -77,6 +76,9 @@ const [allErrors, setAllErrors] = useState({})
         if(error.code === 'auth/internal-error'){
           errors.invalidPass = 'Por favor, escribe una contraseña'
         }
+        if(error.code === 'auth/email-already-in-use'){
+          errors.alreadyUseEmail = 'El email ya se encuentra en uso'
+        }
         return setAllErrors(errors)
       }
   };
@@ -88,6 +90,7 @@ const [allErrors, setAllErrors] = useState({})
         <label htmlFor="email">Email</label>
         <Input onChange={changeValue} type={"email"} name="email" placeholder="usuario@gmail.com"/>
         <Err>{allErrors.invalidEmail && allErrors.invalidEmail}</Err>
+        <Err>{allErrors.alreadyUseEmail && allErrors.alreadyUseEmail}</Err>
            
         <label htmlFor="password">Password</label>
         <Input onChange={changeValue} type={"password"} name="password" placeholder="Contraseña"/>
