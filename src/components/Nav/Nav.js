@@ -8,12 +8,16 @@ import Jarra from '../../images/jarra.png'
 const TheNav = styled.nav``;
 
 const Img = styled.img`
-  width: 60px;
-  height: 60px;
-  padding: 8px;
+  width: 70px;
+  height: 70px;
+  padding: 10px;
   border-radius: 100%;
   border: 1px solid rgba(128, 128, 128, 0.300);
   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.150);
+  &:hover{
+    background-color: #ede1fc;
+    transition: 0.3s;
+  }
 `;
 
 const Section = styled.section`
