@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Nav from "../../components/Nav/Nav";
+import NavButtom from "../../components/NavButtom/NavButtom";
 import Search from "../../components/Search/Search";
 import { useTheContext } from "../../context/context";
 import { useProducts } from "../../Hooks/useProducts";
@@ -68,6 +69,7 @@ const Home = () => {
           </ContainerProduct>
         ))}
       </ContaianerAll>
+      <NavButtom/>
       <button onClick={logAuth}>Cerrar Sesion</button>
     </main>
   );
