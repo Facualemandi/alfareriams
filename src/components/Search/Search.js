@@ -4,6 +4,7 @@ import { useProducts } from "../../Hooks/useProducts";
 
 const ContainerSerch = styled.section`
   width: 100%;
+  margin-top: 70px;
 `;
 const Input = styled.input`
   padding: 20px;
@@ -23,8 +24,6 @@ const Search = ({ searchProduct }) => {
   return (
     <ContainerSerch>
       <Input onChange={searchProduct} placeholder="nombre de producto" />
-
-      
     </ContainerSerch>
   );
 };

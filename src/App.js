@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={<EnterWeb />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<ProtectRoute> <Home /> </ProtectRoute> } />
+        <Route path="/home" element={<ProtectRoute> <Home /> </ProtectRoute> }/>
       </Routes>
     </ProviderContext>
   );

@@ -1,10 +1,15 @@
+import { doc, getDoc } from "firebase/firestore";
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Nav from "../../components/Nav/Nav";
 import NavButtom from "../../components/NavButtom/NavButtom";
 import Search from "../../components/Search/Search";
+import ViewProduct from "../../components/ViewProduct/ViewProduct";
 import { useTheContext } from "../../context/context";
+import { db } from "../../firebase/firebase";
 import { useProducts } from "../../Hooks/useProducts";
+
 
 const Img = styled.img`
   width: 100%;
@@ -15,13 +20,16 @@ const ContaianerAll = styled.section`
   display: grid;
   width: 100vw;
   grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 100px;
 `;
-const ContainerProduct = styled.section`
+const ContainerProduct = styled(NavLink)`
   margin: 15px;
   height: max-content;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.200);
   padding: 5px;
   border-radius: 15px;
+  text-decoration: none;
+  color: black;
 `;
 const DivPriceName = styled.div`
   display: flex;
@@ -39,9 +47,12 @@ const DivPriceName = styled.div`
   }
 `;
 
+
+
 const Home = () => {
-  const { userAutentication, logAuth } = useTheContext();
-  const { products } = useProducts();
+  const { userAutentication} = useTheContext();
+  const {getOneProduct, products, productAlone, modal, setModal} = useProducts()
+  
   const [changeValue, setChangeValue] = useState("");
 
   if (userAutentication === null) {
@@ -50,8 +61,12 @@ const Home = () => {
   const searchProduct = (e) => {
     setChangeValue(e.target.value);
   };
-
   const filterProducts = products.filter((el) =>el.name.toLowerCase().includes(changeValue.toLowerCase()));
+
+
+  console.log(productAlone)
+
+
 
   return (
     <main>
@@ -60,8 +75,8 @@ const Home = () => {
 
       <ContaianerAll>
         {filterProducts.map((obj) => (
-          <ContainerProduct key={obj.id}>
-            <Img alt="" src={obj.img.img1} />
+          <ContainerProduct key={obj.id} onClick={() => getOneProduct(obj.id)}>
+            <Img alt={obj.name} src={obj.img.img1}/>
             <DivPriceName>
               <p>{obj.name}</p>
               <p>${obj.price}</p>
@@ -69,8 +84,12 @@ const Home = () => {
           </ContainerProduct>
         ))}
       </ContaianerAll>
+      
+      {modal && 
+      <ViewProduct setModal={setModal} productAlone={productAlone}/>
+      }
+
       <NavButtom/>
-      <button onClick={logAuth}>Cerrar Sesion</button>
     </main>
   );
 };
