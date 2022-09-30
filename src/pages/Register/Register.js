@@ -66,7 +66,6 @@ const [allErrors, setAllErrors] = useState({})
       navigate("/home")
     } catch (error) {
       let errors = {}
-      console.log(error.code)
         if(error.code === 'auth/invalid-email'){
           errors.invalidEmail = 'Email invalido'
         }

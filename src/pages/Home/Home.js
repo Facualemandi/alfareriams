@@ -61,10 +61,8 @@ const Home = () => {
   const searchProduct = (e) => {
     setChangeValue(e.target.value);
   };
-  const filterProducts = products.filter((el) =>el.name.toLowerCase().includes(changeValue.toLowerCase()));
+  const filterProducts = products.filter((el) => el.name.toLowerCase().includes(changeValue.toLowerCase()));
 
-
-  console.log(productAlone)
 
 
 
@@ -86,7 +84,7 @@ const Home = () => {
       </ContaianerAll>
       
       {modal && 
-      <ViewProduct setModal={setModal} productAlone={productAlone}/>
+      <ViewProduct setModal={setModal} productAlone={productAlone} />
       }
 
       <NavButtom/>

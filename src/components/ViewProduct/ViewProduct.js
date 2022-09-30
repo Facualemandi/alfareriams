@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { BsBasket } from "react-icons/bs";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase";
+import { useTheContext } from "../../context/context";
+import { useProducts } from "../../Hooks/useProducts";
 
 const SectionModal = styled.section`
   position: absolute;
@@ -22,7 +26,6 @@ const Container = styled.section`
   margin-top: 70px;
   box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.500);;
 `;
-
 const ButtonClose = styled.button`
   padding: 15px;
   position: absolute;
@@ -33,7 +36,6 @@ const ButtonClose = styled.button`
   font-size: 18px;
   margin-right: 10px;
 `;
-
 const Img = styled.img`
   width: 100%;
   border-top-left-radius: 15px;
@@ -92,37 +94,43 @@ const ButtonAddCart = styled.button`
   }
 `;
 
-const ViewProduct = ({ setModal, productAlone }) => {
+const ViewProduct = ({ setModal, productAlone, saveProductCart }) => {
   const { color, size, img, name, price, description, material } = productAlone;
+  const {uuidUser} = useTheContext();
+  const {sendProductCart} = useProducts()
 
   const closedModal = () => {
     setModal(false);
-    console.log(productAlone);
   };
+
+
+
+
+
 
   return (
     <SectionModal>
       <Container>
         <DivImg>
-          <Img alt="" src={img.mapValue.fields.img1.stringValue} />
+          <Img alt="" src={img.img1} />
           <div>
-            <p>{name.stringValue}</p>
+            <p>{name}</p>
           </div>
         </DivImg>
 
         <DivDescription>
-          <p>Color: <span>{color.stringValue}</span></p>
-          <p>Tamaño: <span>{size.stringValue}</span></p>
-          <p>Material: <span>{material.stringValue}</span></p>
-          <p>Descripción: <span>{description.stringValue}</span></p>
+          <p>Color: <span>{color}</span></p>
+          <p>Tamaño: <span>{size}</span></p>
+          <p>Material: <span>{material}</span></p>
+          <p>Descripción: <span>{description}</span></p>
         </DivDescription>
 
         <DivAdd>
-          <ButtonAddCart>
+          <ButtonAddCart onClick={() => sendProductCart(uuidUser, productAlone)}>
             <BsBasket />
             Agregr al carrito
             <hr />
-            <p>$ {price.integerValue}</p>
+            <p>$ {price}</p>
           </ButtonAddCart>
         </DivAdd>
       </Container>
