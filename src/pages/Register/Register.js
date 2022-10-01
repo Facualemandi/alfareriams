@@ -51,7 +51,7 @@ const Err = styled.p`
 `
 
 const Register = () => {
-  const { signUp, user, setUser } = useTheContext();
+  const { register, user, setUser } = useTheContext();
   const navigate = useNavigate();
 
 
@@ -62,7 +62,7 @@ const [allErrors, setAllErrors] = useState({})
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signUp(user.email, user.password);
+      await register(user.email, user.password);
       navigate("/home")
     } catch (error) {
       let errors = {}

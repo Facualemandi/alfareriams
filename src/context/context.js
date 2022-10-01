@@ -27,7 +27,7 @@ export function ProviderContext({ children }) {
   const [loading, setLoading] = useState(true);
   const [uuidUser, setUuidUser] = useState("");
 
-  const signUp = async (email, password) => {
+  const register = async (email, password) => {
     await createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -59,19 +59,16 @@ export function ProviderContext({ children }) {
   const addUserToCollect = async (email, uid) => {
     const refCollect = collection(db, "Users");
     const refDocument = doc(refCollect, uid);
-    if (refDocument) {
-      return;
-    } else {
       const docRef = doc(db, "Users", uid);
       const payload = { email, cartUser, uid };
       await setDoc(docRef, payload);
-    }
+
   };
 
   return (
     <getUser.Provider
       value={{
-        signUp,
+        register,
         login,
         user,
         setUser,
