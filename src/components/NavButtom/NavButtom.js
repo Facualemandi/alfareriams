@@ -6,6 +6,7 @@ import User from "../../images/user.png";
 import Cart from "../../images/cart.png";
 import Hamburger from "hamburger-react";
 import { useTheContext } from "../../context/context";
+import { useProducts } from "../../Hooks/useProducts";
 
 const Nav = styled.nav`
   height: auto;
@@ -58,7 +59,9 @@ box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.150);
 `
 const NavButtom = () => {
   const {logAuth } = useTheContext();
+  const {collectCart}  = useProducts();
   const [isOpen, setOpen] = useState(false);
+  console.log(collectCart)
   
   
   return (

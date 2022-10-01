@@ -30,8 +30,7 @@ export const useProducts = () => {
 
     const getDocUser =  doc(userCart, uuidUser);
     const docUser = await getDoc(getDocUser);
-
-    console.log(docUser.data().cartUser)
+    setCollectCart(docUser.data().cartUser)
   };
 
   const getOneProduct = async (id, product) => {
@@ -74,6 +73,7 @@ export const useProducts = () => {
     modal,
     setModal,
     sendProductCart,
+    collectCart,
   };
 };
 
