@@ -83,7 +83,7 @@ const Home = () => {
       </ContaianerAll>
       
       {modal && 
-      <ViewProduct setModal={setModal} productAlone={productAlone} />
+       <ViewProduct setModal={setModal} productAlone={productAlone} />
       }
 
       <NavButtom/>

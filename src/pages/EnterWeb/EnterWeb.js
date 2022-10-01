@@ -19,12 +19,13 @@ const SectionLogin = styled.section`
  align-items: center;
  width: 90%;
  margin: auto;
- border-radius: 30px;
+ border-radius: 10px;
  margin-top: -100px;
  background-color: #74a6e467;
  backdrop-filter: blur(3px);
- box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.300);
+ box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.300);
  margin-bottom: 30px;
+ border: 1px solid rgba(0, 0, 0, 0.493);
 
  @media (min-width: 600px){
    width: 45%;

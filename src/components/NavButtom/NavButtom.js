@@ -55,6 +55,7 @@ position: absolute;
 top: 10px;
 right: 10px;
 box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.150);
+
 `
 
 const ViewItemsCart = styled.div`
@@ -94,6 +95,9 @@ const SectionProduct = styled.section`
   align-items: center;
   margin: 15px;
   border-radius: 10px;
+  div{
+    font-family: 'Roboto', sans-serif;
+  }
 `
 
 const IconDelete = styled(AiOutlineDelete)`
@@ -101,12 +105,20 @@ width: 35px;
 height: 35px;
 color: grey;
 `
-
-
 const ImgCart = styled.img`
 width: 120px;
 height: 100px;
 `
+
+const Name = styled.p`
+font-size: 22px;
+margin-bottom: 5px;
+`
+const Price = styled.p`
+font-size: 18px;
+`
+
+
 const NavButtom = () => {
   const {logAuth } = useTheContext();
   const {collectCart}  = useProducts();
@@ -145,9 +157,8 @@ const NavButtom = () => {
                     <SectionProduct key={product.id}>
                       <ImgCart alt="" src={product.img.img1}/>
                       <div>
-                      <p>{product.name}</p>
-                      <p>$ {product.price}</p>
-                      <p>{product.name}</p>
+                        <Name>{product.name}</Name>
+                        <Price>$ {product.price}</Price>
                       </div>
                        <IconDelete/>
                     </SectionProduct>

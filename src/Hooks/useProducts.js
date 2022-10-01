@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useTheContext } from "../context/context";
+import Swal from "sweetalert2";
 
 export const useProducts = () => {
   const {uuidUser} = useTheContext()
@@ -37,7 +38,7 @@ export const useProducts = () => {
   };
 
 
-  const sendProductCart = async (uid, product) => {
+  const sendProductCart = async (uid, product, setModal) => {
       console.log(product)
       const refCollect = collection(db, 'Users');
       const docRef = doc(refCollect, uid);
@@ -47,12 +48,20 @@ export const useProducts = () => {
 
       const totalProductInTheCart = oneDoc.data().cartUser;
       const findProductInCart = totalProductInTheCart.find(obj => obj.id === product.id)
-
+      
       if(findProductInCart){
           console.log('Producto yaa existe')
       }else{
-        await updateDoc(docRef, {cartUser: [...totalProductInTheCart, product]});
-        return await getProducts()
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Producto agregado',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        setModal(false)
+        return await updateDoc(docRef, {cartUser: [...totalProductInTheCart, product]});
+  
       }
        
   }
