@@ -72,6 +72,10 @@ div{
    color: black;
    font-family: 'Robot',sans-serif;
    padding: 5px;
+   background-color: ${({value}) => value ? 'rgba(255, 166, 0, 0.441)' : ''};
+
+   &:active{
+   }
 }
 `
 
@@ -80,7 +84,7 @@ position: fixed;
 bottom: 0px;
 height: auto;
 width: 100%;
-transform: ${({value}) => value ? 'translateY(100%)' : 'translateY(0%)'};
+transform: ${({value}) => value ? 'translateY(0%)' : 'translateY(100%)'};
 transition: 0.5s;
 margin-bottom: 90px;
 background-color: white;
@@ -146,7 +150,7 @@ const NavButtom = () => {
         <Img src={Dark} />
         <Img src={User} />
 
-        <ViewItemsCart onClick={openMenuCart}>
+        <ViewItemsCart onClick={openMenuCart} value={valueCart}>
           <Img src={Cart} />
           <div value={collectCart.length}>{collectCart.length}</div>
        </ViewItemsCart>

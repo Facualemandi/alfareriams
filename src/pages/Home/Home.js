@@ -1,13 +1,14 @@
-import { doc, getDoc } from "firebase/firestore";
+
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import Loader from "../../components/Loader/Loader";
 import Nav from "../../components/Nav/Nav";
 import NavButtom from "../../components/NavButtom/NavButtom";
 import Search from "../../components/Search/Search";
 import ViewProduct from "../../components/ViewProduct/ViewProduct";
 import { useTheContext } from "../../context/context";
-import { db } from "../../firebase/firebase";
 import { useProducts } from "../../Hooks/useProducts";
 
 
@@ -15,6 +16,9 @@ const Img = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 50px;
+  @media (min-width: 600px){
+    cursor: pointer;
+  }
 `;
 const ContaianerAll = styled.section`
   display: grid;
@@ -56,13 +60,18 @@ const Home = () => {
   const [changeValue, setChangeValue] = useState("");
 
   if (userAutentication === null) {
-    return <p>Cargando</p>;
+    return <Loader/>
   }
   const searchProduct = (e) => {
     setChangeValue(e.target.value);
   };
   const filterProducts = products.filter((el) => el.name.toLowerCase().includes(changeValue.toLowerCase()));
 
+   if(products.length === 0){
+     return <Loader/>
+   }
+
+   
 
 
   return (
@@ -70,9 +79,10 @@ const Home = () => {
       <Search searchProduct={searchProduct} />
       <Nav />
 
+ <AnimatePresence>
       <ContaianerAll>
         {filterProducts.map((obj) => (
-          <ContainerProduct key={obj.id} onClick={() => getOneProduct(obj.id, obj)}>
+          <ContainerProduct as={motion.div} whileHover={{scale: 1.05}} key={obj.id} onClick={() => getOneProduct(obj.id, obj)}>
             <Img alt={obj.name} src={obj.img.img1}/>
             <DivPriceName>
               <p>{obj.name}</p>
@@ -81,6 +91,13 @@ const Home = () => {
           </ContainerProduct>
         ))}
       </ContaianerAll>
+ </AnimatePresence>
+
+
+      
+
+
+
       
       {modal && 
        <ViewProduct setModal={setModal} productAlone={productAlone} />
