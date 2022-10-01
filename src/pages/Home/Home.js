@@ -67,9 +67,6 @@ const Home = () => {
   };
   const filterProducts = products.filter((el) => el.name.toLowerCase().includes(changeValue.toLowerCase()));
 
-   if(products.length === 0){
-     return <Loader/>
-   }
 
    
 
@@ -79,10 +76,16 @@ const Home = () => {
       <Search searchProduct={searchProduct} />
       <Nav />
 
- <AnimatePresence>
+  <AnimatePresence>
       <ContaianerAll>
         {filterProducts.map((obj) => (
-          <ContainerProduct as={motion.div} whileHover={{scale: 1.05}} key={obj.id} onClick={() => getOneProduct(obj.id, obj)}>
+          <ContainerProduct as={motion.div}
+           initial={{scale: 0.5}} 
+           transition={{duration: 0.5}} 
+           animate={{scale: 1}}  
+           whileHover={{scale: 1.05}} key={obj.id} 
+           onClick={() => getOneProduct(obj.id, obj)}>
+
             <Img alt={obj.name} src={obj.img.img1}/>
             <DivPriceName>
               <p>{obj.name}</p>
@@ -91,7 +94,7 @@ const Home = () => {
           </ContainerProduct>
         ))}
       </ContaianerAll>
- </AnimatePresence>
+  </AnimatePresence>
 
 
       
