@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
+import { AiOutlineDelete } from 'react-icons/ai';
 import Dark from "../../images/dark.png";
 import User from "../../images/user.png";
 import Cart from "../../images/cart.png";
@@ -57,11 +57,71 @@ top: 10px;
 right: 10px;
 box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.150);
 `
+
+const ViewItemsCart = styled.div`
+position: relative;
+div{
+  position: absolute;
+  z-index: 2500;
+   top: 0px;
+   border-radius: 20px;
+   display: flex;
+   flex-direction: row-reverse;
+   font-size: 20px;
+   font-weight: bold;
+   color: black;
+   font-family: 'Robot',sans-serif;
+   padding: 5px;
+}
+`
+
+const ContainerCart = styled.section`
+position: absolute;
+bottom: 0px;
+height: auto;
+width: 100%;
+transform: ${({value}) => value ? 'translateY(125%)' : 'translateY(0%)'};
+transition: 0.5s;
+margin-bottom: 90px;
+background-color: white;
+`
+
+const SectionProduct = styled.section`
+   border: 1px solid rgba(128, 128, 128, 0.353);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 15px;
+  border-radius: 10px;
+`
+
+const IconDelete = styled(AiOutlineDelete)`
+width: 35px;
+height: 35px;
+color: grey;
+`
+
+
+const ImgCart = styled.img`
+width: 120px;
+height: 100px;
+`
 const NavButtom = () => {
   const {logAuth } = useTheContext();
   const {collectCart}  = useProducts();
   const [isOpen, setOpen] = useState(false);
+  const [valueCart, setValueCart] = useState(false)
+
   console.log(collectCart)
+
+  const openMenuCart = () => {
+     if(!valueCart){
+      setValueCart(true)
+     }else{
+      setValueCart(false)
+     }
+  }
+
   
   
   return (
@@ -72,8 +132,28 @@ const NavButtom = () => {
       <Nav>
         <Img src={Dark} />
         <Img src={User} />
-        <Img src={Cart} />
+
+        <ViewItemsCart onClick={openMenuCart}>
+          <Img src={Cart} />
+          <div value={collectCart.length}>{collectCart.length}</div>
+       </ViewItemsCart>
       </Nav>
+
+          <ContainerCart value={valueCart}> 
+                {collectCart.map(product => (
+                    <SectionProduct key={product.id}>
+                      <ImgCart alt="" src={product.img.img1}/>
+                      <div>
+                      <p>{product.name}</p>
+                      <p>$ {product.price}</p>
+                      <p>{product.name}</p>
+                      </div>
+                       <IconDelete/>
+                    </SectionProduct>
+                ))}
+          </ContainerCart>
+
+
 
        <OpenNav>
            <Hamburger toggled={isOpen} toggle={setOpen}/>

@@ -27,7 +27,6 @@ export const useProducts = () => {
   const getProducts = async () => {
     const data = await getDocs(productsCollect);
     setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-
     const getDocUser =  doc(userCart, uuidUser);
     const docUser = await getDoc(getDocUser);
     setCollectCart(docUser.data().cartUser)
@@ -54,7 +53,8 @@ export const useProducts = () => {
       if(findProductInCart){
           console.log('Producto yaa existe')
       }else{
-        return await updateDoc(docRef, {cartUser: [...totalProductInTheCart, product]});
+        await updateDoc(docRef, {cartUser: [...totalProductInTheCart, product]});
+        return await getProducts()
       }
        
   }
