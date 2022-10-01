@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
-import { collection, doc, setDoc, } from "firebase/firestore";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 const getUser = createContext();
 
@@ -25,20 +25,22 @@ export function ProviderContext({ children }) {
 
   const [userAutentication, setUserAutentication] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [uuidUser, setUuidUser] = useState('')
+  const [uuidUser, setUuidUser] = useState("");
 
   const signUp = async (email, password) => {
     await createUserWithEmailAndPassword(auth, email, password);
-     
   };
-
 
   const logAuth = async () => {
     await signOut(auth);
     navigate("/");
   };
   const login = async (email, password) => {
-    const userCredentials = await signInWithEmailAndPassword( auth, email, password );
+    const userCredentials = await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
     console.log(userCredentials);
   };
 
@@ -51,17 +53,20 @@ export function ProviderContext({ children }) {
       addUserToCollect(currentUser.email, currentUser.uid);
     });
   }, []);
-  
 
-  const [cartUser, setCartUser] = useState([])
+  const [cartUser, setCartUser] = useState([]);
 
   const addUserToCollect = async (email, uid) => {
-    const docRef = doc(db, 'Users', uid);
-    const payload = {email, cartUser};
-    await setDoc(docRef, payload)
-  }
-
-
+    const refCollect = collection(db, "Users");
+    const refDocument = doc(refCollect, uid);
+    if (refDocument) {
+      return;
+    } else {
+      const docRef = doc(db, "Users", uid);
+      const payload = { email, cartUser, uid };
+      await setDoc(docRef, payload);
+    }
+  };
 
   return (
     <getUser.Provider

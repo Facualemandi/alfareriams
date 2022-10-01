@@ -65,7 +65,6 @@ const Home = () => {
 
 
 
-
   return (
     <main>
       <Search searchProduct={searchProduct} />
@@ -73,7 +72,7 @@ const Home = () => {
 
       <ContaianerAll>
         {filterProducts.map((obj) => (
-          <ContainerProduct key={obj.id} onClick={() => getOneProduct(obj.id)}>
+          <ContainerProduct key={obj.id} onClick={() => getOneProduct(obj.id, obj)}>
             <Img alt={obj.name} src={obj.img.img1}/>
             <DivPriceName>
               <p>{obj.name}</p>

@@ -94,7 +94,7 @@ const ButtonAddCart = styled.button`
   }
 `;
 
-const ViewProduct = ({ setModal, productAlone, saveProductCart }) => {
+const ViewProduct = ({ setModal, productAlone }) => {
   const { color, size, img, name, price, description, material } = productAlone;
   const {uuidUser} = useTheContext();
   const {sendProductCart} = useProducts()
@@ -102,6 +102,7 @@ const ViewProduct = ({ setModal, productAlone, saveProductCart }) => {
   const closedModal = () => {
     setModal(false);
   };
+  console.log(productAlone)
 
 
 
@@ -112,7 +113,7 @@ const ViewProduct = ({ setModal, productAlone, saveProductCart }) => {
     <SectionModal>
       <Container>
         <DivImg>
-          <Img alt="" src={img.img1} />
+          <Img alt={name} src={img.img1} />
           <div>
             <p>{name}</p>
           </div>

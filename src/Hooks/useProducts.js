@@ -25,29 +25,32 @@ export const useProducts = () => {
   const getProducts = async () => {
     const data = await getDocs(productsCollect);
     setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-
-    console.log(products)
   };
 
-  const getOneProduct = async (id) => {
-    const oneProduct = doc(db, "allProducts", id);
-    const aloneDoc = await getDoc(oneProduct);
+  const getOneProduct = async (id, product) => {
+    console.log(product)
     setModal(true);
-    setProductAlone(aloneDoc.data(), aloneDoc.id);
-    console.log(productAlone)
+    setProductAlone(product);
   };
 
 
   const sendProductCart = async (uid, product) => {
-    const refCollect = collection(db, 'Users');
-    const docRef = doc(refCollect, uid);
-     
+      console.log(product)
+      const refCollect = collection(db, 'Users');
+      const docRef = doc(refCollect, uid);
+    
       const getOneDoc = doc(db, 'Users', uid);
       const oneDoc = await getDoc(getOneDoc); 
 
       const totalProductInTheCart = oneDoc.data().cartUser;
-      console.log(totalProductInTheCart)
-      return await updateDoc(docRef, {cartUser: [...totalProductInTheCart, product]});
+      const findProductInCart = totalProductInTheCart.find(obj => obj.id === product.id)
+
+      if(findProductInCart){
+          console.log('Producto yaa existe')
+      }else{
+        return await updateDoc(docRef, {cartUser: [...totalProductInTheCart, product]});
+      }
+       
   }
 
 
