@@ -104,11 +104,6 @@ const ViewProduct = ({ setModal, productAlone }) => {
   };
 
 
-
-
-
-
-
   return (
     <SectionModal>
       <Container>

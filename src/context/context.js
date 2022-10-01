@@ -52,10 +52,9 @@ export function ProviderContext({ children }) {
     onAuthStateChanged(auth, (currentUser) => {
       setUserAutentication(currentUser);
       setLoading(false);
-      console.log(currentUser)
       setUuidUser(currentUser.uid);
     });
-  }, []);
+  }, [uuidUser]);
 
   const [cartUser, setCartUser] = useState([]);
 

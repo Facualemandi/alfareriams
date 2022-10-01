@@ -11,8 +11,10 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useNavigate } from "react-router-dom";
+import { useTheContext } from "../context/context";
 
 export const useProducts = () => {
+  const {uuidUser} = useTheContext()
   const [products, setProducts] = useState([]);
   const [productAlone, setProductAlone] = useState([]);
   const [modal, setModal] = useState(false);
@@ -25,6 +27,11 @@ export const useProducts = () => {
   const getProducts = async () => {
     const data = await getDocs(productsCollect);
     setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+
+    const getDocUser =  doc(userCart, uuidUser);
+    const docUser = await getDoc(getDocUser);
+
+    console.log(docUser.data().cartUser)
   };
 
   const getOneProduct = async (id, product) => {
