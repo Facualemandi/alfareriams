@@ -102,7 +102,7 @@ const ViewProduct = ({ setModal, productAlone }) => {
   const closedModal = () => {
     setModal(false);
   };
-  console.log(productAlone)
+
 
 
 

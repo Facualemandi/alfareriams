@@ -21,7 +21,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
      try {
-      await login(user.email, user.password);
+      await login(user.email, user.password, user);
         navigate('/home')
      } catch (error) {
       let errors = {};

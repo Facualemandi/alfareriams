@@ -29,41 +29,43 @@ export function ProviderContext({ children }) {
 
   const register = async (email, password) => {
     await createUserWithEmailAndPassword(auth, email, password);
+   const saveUser = onAuthStateChanged(auth, async (currentUser) => {
+      console.log(currentUser)
+      await addUserToCollect(currentUser.email, currentUser.uid);
+    });
+    saveUser();
   };
 
   const logAuth = async () => {
     await signOut(auth);
     navigate("/");
   };
-  const login = async (email, password) => {
+  const login = async (email, password, user) => {
     const userCredentials = await signInWithEmailAndPassword(
       auth,
       email,
       password
     );
-    console.log(userCredentials);
   };
 
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       setUserAutentication(currentUser);
       setLoading(false);
-      console.log(currentUser);
+      console.log(currentUser)
       setUuidUser(currentUser.uid);
-      addUserToCollect(currentUser.email, currentUser.uid);
     });
   }, []);
 
   const [cartUser, setCartUser] = useState([]);
 
   const addUserToCollect = async (email, uid) => {
-    const refCollect = collection(db, "Users");
-    const refDocument = doc(refCollect, uid);
       const docRef = doc(db, "Users", uid);
       const payload = { email, cartUser, uid };
       await setDoc(docRef, payload);
-
   };
+
+
 
   return (
     <getUser.Provider
