@@ -39,7 +39,7 @@ export const useProducts = () => {
 
 
   const sendProductCart = async (uid, product, setModal) => {
-      console.log(product)
+
       const refCollect = collection(db, 'Users');
       const docRef = doc(refCollect, uid);
     
@@ -71,7 +71,7 @@ export const useProducts = () => {
 
   useEffect(() => {
     getProducts();
-  }, []);
+  }, [collectCart]);
 
   return {
     products,
