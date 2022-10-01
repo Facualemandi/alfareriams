@@ -17,9 +17,8 @@ const Nav = styled.nav`
   justify-content: space-around;
   align-items: center;
   padding: 10px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
   background-color: rgb(231, 231, 231);
+  z-index: 5000;
 
   div {
     width: 70px;
@@ -76,14 +75,16 @@ div{
 `
 
 const ContainerCart = styled.section`
-position: absolute;
+position: fixed;
 bottom: 0px;
 height: auto;
 width: 100%;
-transform: ${({value}) => value ? 'translateY(125%)' : 'translateY(0%)'};
+transform: ${({value}) => value ? 'translateY(100%)' : 'translateY(0%)'};
 transition: 0.5s;
 margin-bottom: 90px;
 background-color: white;
+box-shadow: 0px -1px 5px 0px rgba(128, 128, 128, 0.353);
+
 `
 
 const SectionProduct = styled.section`

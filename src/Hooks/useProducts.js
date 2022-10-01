@@ -7,10 +7,8 @@ import {
   getDoc,
   doc,
   updateDoc,
-  setDoc,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-import { useNavigate } from "react-router-dom";
 import { useTheContext } from "../context/context";
 
 export const useProducts = () => {
